@@ -37,13 +37,12 @@ echo '
 
 Do you really wanty to delete this alias?
 Type \'yes\' to confirm : ';
-$confirm =    trim(fgets(STDIN));
-$confirm =    trim($confirm ,'\'');
+$confirm = trim(fgets(STDIN));
+$confirm = trim($confirm, '\'');
 
-if ($confirm == 'yes')
-{
-    unlink ($aliasDir.str_replace('-whitespace-',' ',$_SERVER['argv'][1]).'.conf');
-    echo '
+if ($confirm == 'yes') {
+	unlink($aliasDir . str_replace('-whitespace-', ' ', $_SERVER['argv'][1]) . '.conf');
+	echo '
     
     
     
@@ -75,15 +74,13 @@ if ($confirm == 'yes')
     
     
 Alias deleted. Press Enter to exit...';
-    trim(fgets(STDIN));
-    exit();
-}
-else
-{
-    echo'
+	trim(fgets(STDIN));
+	exit();
+} else {
+	echo '
 Alias not deleted. Press Enter to exit...';
-    trim(fgets(STDIN));
-    exit();
+	trim(fgets(STDIN));
+	exit();
 }
 
 ?>

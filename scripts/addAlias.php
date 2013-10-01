@@ -41,26 +41,24 @@ http://localhost/test/
 
 : ';
 $newAliasDir = trim(fgets(STDIN));
-$newAliasDir = trim($newAliasDir,'/\'');
+$newAliasDir = trim($newAliasDir, '/\'');
 
 
-if (is_file($aliasDir.$newAliasDir.'.conf'))
-{
-    echo '
+if (is_file($aliasDir . $newAliasDir . '.conf')) {
+	echo '
 
 Alias already exists. Press Enter to exit...';
-    trim(fgets(STDIN));
-    exit();
+	trim(fgets(STDIN));
+	exit();
 }
 
 
-if ($newAliasDir == '')
-{
-    echo '
+if ($newAliasDir == '') {
+	echo '
 
 Alias not created. Press Enter to exit...';
-    trim(fgets(STDIN));
-    exit();
+	trim(fgets(STDIN));
+	exit();
 }
 
 echo '
@@ -87,46 +85,43 @@ For example,
 
 \'c:/test/\'
 
-would make http://localhost/'.$newAliasDir.'/ point to 
+would make http://localhost/' . $newAliasDir . '/ point to
 
 c:/test/
 
 : ';
 $newAliasDest = trim(fgets(STDIN));
-if ($newAliasDest[strlen($newAliasDest)-1] != '/')
-    $newAliasDest .= '/';
-if (!is_dir($newAliasDest))
-{
-    echo '
+if ($newAliasDest[strlen($newAliasDest) - 1] != '/') $newAliasDest .= '/';
+if (!is_dir($newAliasDest)) {
+	echo '
 This directory doesn\'t exist.
 ';
-    $newAliasDest = '';
+	$newAliasDest = '';
 }
 
-if ($newAliasDest == '')
-{
-    echo '
+if ($newAliasDest == '') {
+	echo '
 
 Alias not created. Press Enter to exit...';
-    trim(fgets(STDIN));
-    exit();
+	trim(fgets(STDIN));
+	exit();
 }
 
-$newConfFileContents = 'Alias /'.$newAliasDir.'/ "'.$newAliasDest.'" 
+$newConfFileContents = 'Alias /' . $newAliasDir . '/ "' . $newAliasDest . '"
 
-<Directory "'.$newAliasDest.'">
+<Directory "' . $newAliasDest . '">
     Options Indexes FollowSymLinks MultiViews
     AllowOverride all
         Order allow,deny
     Allow from all
 </Directory>';
-file_put_contents($aliasDir.$newAliasDir.'.conf',$newConfFileContents) or die ("unable to create conf file");
+file_put_contents($aliasDir . $newAliasDir . '.conf', $newConfFileContents) or die ("unable to create conf file");
 
 
 echo '
 Alias created. Press Enter to exit...';
-    trim(fgets(STDIN));
-    exit();
+trim(fgets(STDIN));
+exit();
 
 
 ?>
